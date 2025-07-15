@@ -2,9 +2,11 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
-const id = process.env.GOOGLE_CLIENT_ID || "";
-const secret = process.env.GOOGLE_CLIENT_SECRET || "";
+const gId = process.env.GOOGLE_CLIENT_ID || "";
+const gSecret = process.env.GOOGLE_CLIENT_SECRET || "";
+const secret = process.env.SECRET || "";
 const handler = NextAuth({
+  secret: secret,
   providers: [
     // CredentialsProvider({
     //   // The name to display on the sign in form (e.g. 'Sign in with...')
@@ -40,8 +42,8 @@ const handler = NextAuth({
     //   },
     // }),
     GoogleProvider({
-      clientId: id,
-      clientSecret: secret,
+      clientId: gId,
+      clientSecret: gSecret,
     }),
   ],
 });
