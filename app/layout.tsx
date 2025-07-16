@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Provider } from "./components/provider/Provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portify – Drag & Drop Portfolio Builder",
+  title: "Portify ~ Drag & Drop Builder",
   description:
     "Portify is a free and easy-to-use portfolio builder. Create stunning personal sites, resumes, or business pages with drag & drop, templates, and custom scripts.",
   keywords: [
@@ -41,7 +42,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Provider>{children}</Provider>
       </body>
     </html>
   );

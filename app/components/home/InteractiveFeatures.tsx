@@ -27,7 +27,8 @@ export default function InteractiveFeatures({
         >
           Features
         </h2>
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* <div className="grid md:grid-cols-3 gap-8"> */}
+        <div className="flex justify-center gap-5">
           {features.map((feature, index) => (
             <div
               key={index}
