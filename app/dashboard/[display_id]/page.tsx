@@ -1,17 +1,17 @@
 // app/dashboard/[userId]/page.tsx
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { grapeJsGithubLink } from "@/app/config/constants";
+import { authOptions } from "@/app/lib/auth/authoptions";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 
-type Props = {
-  params: {
-    display_id: string;
-  };
+type PageProps = {
+  params: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export default async function DashboardPage({ params }: Props) {
-  const { display_id } = await params;
+export default async function DashboardPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const display_id = resolvedParams?.display_id as string;
 
   const session: any = await getServerSession(authOptions);
   if (!session) {
@@ -32,7 +32,14 @@ export default async function DashboardPage({ params }: Props) {
       </span>
       <span className="mt-2 text-gray-600">
         The core functionality of editor will be built using{" "}
-        <a href={grapeJsGithubLink} target="_blank" className="text-blue-600 underline font-bold">grapejs</a>, it is free and open-source
+        <a
+          href={grapeJsGithubLink}
+          target="_blank"
+          className="text-blue-600 underline font-bold"
+        >
+          grapejs
+        </a>
+        , it is free and open-source
       </span>
     </div>
   );

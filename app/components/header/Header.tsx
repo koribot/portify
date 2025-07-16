@@ -1,14 +1,14 @@
 import React from "react";
 import { AiOutlineStar } from "react-icons/ai";
-import { FiGithub, FiHeart } from "react-icons/fi";
+import { FiHeart } from "react-icons/fi";
 import SignoutButton from "../auth/SignoutButton";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { githubIcon } from "@/app/config/icons";
 import { portifyGithubLink } from "@/app/config/constants";
 import MobileHeaderFrontEnd from "./MobileHeaderFrontEnd";
+import { authOptions } from "@/app/lib/auth/authoptions";
 const Header = async () => {
   const session = await getServerSession(authOptions);
   const headersList = await headers();
