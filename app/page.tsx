@@ -1,20 +1,16 @@
 import {
   FiMousePointer,
   FiCode,
-  FiLayers,
   FiArrowRight,
   FiPlay,
-  FiHeart,
 } from "react-icons/fi";
-import { AiOutlineStar } from "react-icons/ai";
 import type { Feature } from "./types";
 import InteractiveFeatures from "./components/home/InteractiveFeatures";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import UserAnimatedCharacter from "./components/animation/UserAnimatedCharacter";
-import { portifyGithubLink } from "./config/constants";
+import { authOptions } from "./lib/auth/authoptions";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
