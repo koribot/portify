@@ -8,35 +8,53 @@ const protectedPaths = ["/dashboard"];
 const isProtectedPath = (path: string) => protectedPaths.includes(path);
 const isPublicPath = (path: string) => publicPaths.includes(path);
 
-export default async function middleware(req: any) {
+const decodeToken = async (token: any, res: any) => {
   const secretKey = process.env.NEXTAUTH_SECRET || "";
+  try {
+    return await decode({
+      token,
+      secret: secretKey,
+    });
+  } catch (error) {
+    res.cookies.set("next-auth.session-token", "", {
+      maxAge: 0,
+      path: "/",
+    });
+    return null;
+  }
+};
+export default async function middleware(req: any) {
   const { pathname, origin } = req.nextUrl;
   const baseUrl = req.nextUrl.origin;
   const cookie = req.cookies;
 
   // Always Expose pathname so we can access it directly on server components using headler.get("x-pathname") ~ next/headers
   const res = NextResponse.next();
-  res.headers.set("x-public-pathname", pathname)
-
+  res.headers.set("x-public-pathname", pathname);
 
   const authCookie =
     cookie.get("next-auth.session-token")?.value ||
     cookie.get("__Secure-next-auth.session-token")?.value;
-  const decodedToken = await decode({
-    token: authCookie,
-    secret: secretKey,
-  });
 
+  const decodedToken = await decodeToken(authCookie, res);
 
   if (decodedToken) {
-    if(pathname==="/login"){
-      const red = NextResponse.redirect(`${origin}/dashboard`)
-      red.headers.set("x-public-pathname", pathname)
+    if (pathname === "/login") {
+      const red = NextResponse.redirect(`${origin}/dashboard`);
+      red.headers.set("x-public-pathname", pathname);
       return red;
     }
-    if (pathname === "/dashboard" && decodedToken?.sub && typeof decodedToken.sub === "string") {
-      const red = NextResponse.redirect(`${baseUrl}/dashboard/~${decodedToken.sub}~${decodedToken.name?.split(" ").join("_")}~`)
-      red.headers.set("x-public-pathname", pathname)
+    if (
+      pathname === "/dashboard" &&
+      decodedToken?.sub &&
+      typeof decodedToken.sub === "string"
+    ) {
+      const red = NextResponse.redirect(
+        `${baseUrl}/dashboard/~${decodedToken.sub}~${decodedToken.name
+          ?.split(" ")
+          .join("_")}~`
+      );
+      red.headers.set("x-public-pathname", pathname);
       return red;
     }
     const { data, success } = await getUser(decodedToken.email as string);
@@ -47,12 +65,12 @@ export default async function middleware(req: any) {
         maxAge: 0,
         path: "/",
       });
-      return res
+      return res;
     }
-  }else{
-    if(isProtectedPath(pathname)){
-      const red = NextResponse.redirect(`${origin}/login`)
-      red.headers.set("x-public-pathname", pathname)
+  } else {
+    if (isProtectedPath(pathname)) {
+      const red = NextResponse.redirect(`${origin}/login`);
+      red.headers.set("x-public-pathname", pathname);
       return red;
     }
   }
@@ -90,7 +108,6 @@ export default async function middleware(req: any) {
 export const config = {
   matcher: ["/", "/dashboard/:path*", "/api/:path*", "/login"],
 };
-
 
 // import { withAuth } from "next-auth/middleware";
 // import { NextResponse } from "next/server";
