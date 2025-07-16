@@ -2,7 +2,7 @@
 
 **Build Your Online Presence • Portfolio • Resume • Landing Page**
 
-A free and open-source drag & drop builder for creating stunning portfolios, resumes, and landing pages.
+A free drag & drop builder for creating stunning portfolios, resumes, and landing pages.
 
 ## ✨ ROADMAP
 
@@ -13,3 +13,5 @@ A free and open-source drag & drop builder for creating stunning portfolios, res
 - [ ] 🎭 **Retro Aesthetic** - Unique vintage-inspired design system  
 - [ ] 🔐 **Google Authentication** - Secure login with NextAuth  
 - [x] 💾 **Free Forever** - No hidden costs or premium tiers  
+
+

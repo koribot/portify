@@ -1,8 +1,8 @@
-import { FiHeart } from "react-icons/fi"
-import { AiOutlineStar } from "react-icons/ai"
-import GoogleSignInButton from "../components/login/GoogleSignInButton"
+import GoogleSignInButton from "../components/auth/GoogleSignInButton";
+import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
 
-const Login = () => {
+const Login = async () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-100 via-yellow-50 to-red-50 text-orange-900">
       {/* Retro geometric background */}
@@ -29,7 +29,7 @@ const Login = () => {
       ></div>
 
       {/* Header */}
-      <header className="relative z-10 px-4 sm:px-6 py-4 sm:py-6 border-b-4 border-orange-400 bg-yellow-100/80 backdrop-blur-sm">
+      {/* <header className="relative z-10 px-4 sm:px-6 py-4 sm:py-6 border-b-4 border-orange-400 bg-yellow-100/80 backdrop-blur-sm">
         <nav className="flex items-center justify-between max-w-7xl mx-auto">
           <a href="/" className="flex items-center space-x-2 sm:space-x-4">
             <div className="w-8 h-8 sm:w-12 sm:h-12 bg-orange-500 rounded-lg flex items-center justify-center shadow-lg transform rotate-3">
@@ -52,7 +52,8 @@ const Login = () => {
             </a>
           </div>
         </nav>
-      </header>
+      </header> */}
+      <Header />
 
       {/* Main Login Section */}
       <main className="relative z-10 flex items-center justify-center min-h-[calc(100vh-200px)] px-4 sm:px-6 py-16">
@@ -63,12 +64,14 @@ const Login = () => {
               {/* Header */}
               <div className="text-center mb-8">
                 <div className="inline-block px-6 py-2 bg-red-500 text-yellow-100 font-bold text-sm tracking-wide mb-6 transform rotate-2 shadow-lg">
-                  ★ WELCOME BACK ★
+                  ★ WELCOME ★
                 </div>
                 <h1 className="text-3xl sm:text-4xl font-black text-orange-900 mb-4 tracking-wider transform -skew-x-3">
                   SIGN IN
                 </h1>
-                <p className="text-orange-800 font-bold text-lg">Continue building your presence</p>
+                <p className="text-orange-800 font-bold text-lg">
+                  Continue building your presence
+                </p>
               </div>
 
               {/* Divider */}
@@ -105,11 +108,15 @@ const Login = () => {
           {/* Additional Info Cards */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-red-500/90 text-yellow-100 p-4 border-2 border-red-600 shadow-lg transform rotate-1">
-              <div className="font-black text-sm tracking-wide">FREE FOREVER</div>
+              <div className="font-black text-sm tracking-wide">
+                FREE FOREVER
+              </div>
               <div className="text-xs mt-1">No hidden costs</div>
             </div>
             <div className="bg-orange-500/90 text-yellow-100 p-4 border-2 border-orange-600 shadow-lg transform -rotate-1">
-              <div className="font-black text-sm tracking-wide">DRAG & DROP</div>
+              <div className="font-black text-sm tracking-wide">
+                DRAG & DROP
+              </div>
               <div className="text-xs mt-1">Easy to use</div>
             </div>
           </div>
@@ -117,22 +124,9 @@ const Login = () => {
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 px-4 sm:px-6 py-8 border-t-4 border-orange-400 bg-gradient-to-br from-yellow-100 to-orange-100">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="flex items-center justify-center space-x-2 sm:space-x-4 mb-4">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-orange-500 rounded-lg flex items-center justify-center shadow-lg transform rotate-3">
-              <AiOutlineStar className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-100" />
-            </div>
-            <span className="text-lg sm:text-xl font-black text-orange-900 tracking-wider transform -skew-x-6">
-              PORTFOLIO • RESUME • LANDINGPAGE MAKER
-            </span>
-          </div>
-          <div className="w-20 sm:w-24 h-1 bg-red-500 mx-auto mb-4 transform rotate-1"></div>
-          <p className="text-orange-700 font-bold tracking-wide text-sm">© 2025 • MADE FOR CREATORS</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
