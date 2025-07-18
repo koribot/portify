@@ -1,3 +1,4 @@
+import { userTable } from "@/app/config/constants";
 import { supabase } from "./supabaseClient";
 
 interface IGetUserResponse {
@@ -7,7 +8,7 @@ interface IGetUserResponse {
 
 export const getUser = async (email: string): Promise<IGetUserResponse> => {
   const { data, error } = await supabase
-    .from("Users_Portify")
+    .from(userTable)
     .select("*")
     .eq("email", email)
     .single();

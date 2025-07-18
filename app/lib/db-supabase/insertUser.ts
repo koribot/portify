@@ -1,3 +1,4 @@
+import { userTable } from "@/app/config/constants";
 import { supabase } from "./supabaseClient";
 
 interface IInsertUserResponse {
@@ -16,15 +17,15 @@ export const insertUser = async ({
   email,
   username,
   avatar,
-  auth_provider,
+  auth_provider = "google",
 }: IUser): Promise<IInsertUserResponse> => {
   const { data, error } = await supabase
-    .from("Users_Portify")
+    .from(userTable)
     .insert({
       email: email,
       username: username,
       avatar: avatar,
-      auth_provider: "google",
+      auth_provider: auth_provider,
     })
     .select()
     .single();

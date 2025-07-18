@@ -9,6 +9,7 @@ import { githubIcon } from "@/app/config/icons";
 import { portifyGithubLink } from "@/app/config/constants";
 import MobileHeaderFrontEnd from "./MobileHeaderFrontEnd";
 import { authOptions } from "@/app/lib/auth/authoptions";
+import Logo from "../svgs/Logo";
 const Header = async () => {
   const session = await getServerSession(authOptions);
   const headersList = await headers();
@@ -18,8 +19,9 @@ const Header = async () => {
       <nav className="relative">
         <div className="hidden lg:flex items-center justify-between max-w-7xl mx-auto">
           <a href="/" className="flex items-center space-x-2 sm:space-x-4">
-            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-orange-500 rounded-lg flex items-center justify-center shadow-lg transform rotate-3">
-              <AiOutlineStar className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-100" />
+            <div className="w-8 h-8 sm:w-12 sm:h-12  rounded-lg flex items-center justify-center shadow-lg transform rotate-3">
+              {/* <AiOutlineStar className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-100" /> */}
+              <Logo />
             </div>
             <span className="text-lg sm:text-2xl md:text-3xl font-black text-orange-900 tracking-wider transform -skew-x-6">
               PORTIFY

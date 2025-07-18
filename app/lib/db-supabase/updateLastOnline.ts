@@ -1,3 +1,4 @@
+import { userTable } from "@/app/config/constants";
 import { supabase } from "./supabaseClient";
 
 interface IInsertUserResponse {
@@ -9,7 +10,7 @@ export const updateUserLastOnline = async (
   email: string
 ): Promise<IInsertUserResponse> => {
   const { data, error } = await supabase
-    .from("Users_Portify")
+    .from(userTable)
     .update({
       last_online: new Date().toISOString(),
     })
