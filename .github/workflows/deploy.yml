@@ -1,4 +1,4 @@
-name: Deploy to Vercel
+name: Test Build
 
 on:
   push:
