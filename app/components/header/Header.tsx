@@ -5,7 +5,7 @@ import SignoutButton from "../auth/SignoutButton";
 import { getServerSession } from "next-auth";
 import { headers } from "next/headers";
 import Image from "next/image";
-import { githubIcon } from "@/app/config/icons";
+import { githubIcon } from "@/app/icons/icons";
 import { portifyGithubLink } from "@/app/config/constants";
 import MobileHeaderFrontEnd from "./MobileHeaderFrontEnd";
 import { authOptions } from "@/app/lib/auth/authoptions";

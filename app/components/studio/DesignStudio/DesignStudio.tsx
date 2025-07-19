@@ -1,15 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import { useUserSession } from "../hooks/user/useUserSession";
-import ZoomRange from "./ZoomRange";
-
+import ZoomRange from "../ZoomRange";
+import DesignStudioMainCanvas from "./DesignStudioMainCanvas";
 const DesignStudio = () => {
-  const { image } = useUserSession();
   return (
-    <div className="flex h-screen bg-gray-100 font-sans text-gray-800">
+    <div className="flex min-h-screen h-full bg-gray-100 font-sans text-gray-800 justify-center">
       {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-lg flex flex-col border-r border-gray-200">
+      <aside className="w-64 bg-white shadow-lg flex flex-col border-r border-gray-200 sticky">
         <div className="p-4 border-b border-gray-200 flex items-center justify-center h-16">
           <span className="text-2xl font-bold text-blue-600">Design</span>
         </div>
@@ -36,7 +33,7 @@ const DesignStudio = () => {
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Navigation Bar */}
         <nav className="flex items-center justify-between h-16 bg-white border-b border-gray-200 px-4 shadow-sm">
           {/* Left controls */}
@@ -71,16 +68,7 @@ const DesignStudio = () => {
             </button>
           </div>
         </nav>
-
-        {/* Canvas Area */}
-        <div className="flex-1 overflow-auto bg-gray-100 p-8 flex items-center justify-center">
-          <div
-            onContextMenu={(e) => e.preventDefault()}
-            className="w-[800px] h-[600px] bg-white shadow-2xl relative border border-gray-300 rounded-lg flex items-center justify-center text-gray-400 text-2xl font-semibold"
-          >
-            Your Design Canvas
-          </div>
-        </div>
+        <DesignStudioMainCanvas />
       </div>
     </div>
   );

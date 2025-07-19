@@ -1,10 +1,9 @@
 "use client";
 
 import * as React from "react";
-import DesignStudio from "./DesignStudio";
+import DesignStudio from "./DesignStudio/DesignStudio";
 import Image from "next/image";
-import { constructionIcon } from "@/app/config/icons";
-import SampleStudio from "./sample";
+import { constructionIcon } from "@/app/icons/icons";
 
 export default function StudioTabNavigation() {
   const [activeTab, setActiveTab] = React.useState("design-studio");
@@ -42,7 +41,7 @@ export default function StudioTabNavigation() {
         </button>
       </div>
       <div className="flex-1 min-h-[60vh] rounded-xl bg-orange-50/50 border border-orange-300 shadow-inner p-4">
-        <div className="w-full">
+        <div className="max-w-[3000px]">
           {activeTab === "design-studio" && 
           <DesignStudio />
           }

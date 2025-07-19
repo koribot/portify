@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import SignoutButton from "../auth/SignoutButton";
 import { portifyGithubLink } from "@/app/config/constants";
-import { githubIcon } from "@/app/config/icons";
+import { githubIcon } from "@/app/icons/icons";
 import Image from "next/image";
 import { FiHeart, FiMenu, FiX } from "react-icons/fi";
 import { AiOutlineStar } from "react-icons/ai";

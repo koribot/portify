@@ -17,20 +17,10 @@ export default function Dashboard({
 }: DashboardLayoutClientProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Effect to prevent body scrolling when mobile sidebar is open
-  useEffect(() => {
-    if (isSidebarOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = ""; // Clean up on unmount
-    };
-  }, [isSidebarOpen]);
+
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-orange-100 via-yellow-50 to-red-50 text-orange-900 relative">
+    <div className="flex min-h-screen bg-gradient-to-br from-orange-100 via-yellow-50 to-red-50 text-orange-900 relative overflow-hidden">
       <RetroPatterns />
       {isSidebarOpen && (
         <div
