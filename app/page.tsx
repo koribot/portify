@@ -4,13 +4,13 @@ import {
   FiArrowRight,
   FiPlay,
 } from "react-icons/fi";
-import type { Feature } from "./types";
 import InteractiveFeatures from "./components/home/InteractiveFeatures";
 import { getServerSession } from "next-auth/next";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import UserAnimatedCharacter from "./components/animation/UserAnimatedCharacter";
 import { authOptions } from "./lib/auth/authoptions";
+import { Feature } from "./types";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);

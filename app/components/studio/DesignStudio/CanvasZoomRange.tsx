@@ -1,8 +1,8 @@
 "use client";
 
-import { useDesignStudioStore } from "@/app/store/state/design-studio/useDesignStudioStore";
+import { designStudioStore } from "@/app/store/state/design-studio/design-studio-store";
 import type React from "react";
-import { useState, useEffect } from "react";
+import { useStore } from "zustand";
 
 interface ZoomRangeProps {
   min?: number;
@@ -13,14 +13,14 @@ interface ZoomRangeProps {
   unit?: string;
 }
 
-const ZoomRange: React.FC<ZoomRangeProps> = ({
+const CanvasZoomRange: React.FC<ZoomRangeProps> = ({
   min = 10,
-  max = 200,
+  max = 500,
   step = 10,
   label = "Zoom",
   unit = "",
 }) => {
-  const {zoomPercentage, setZoomPercentage} = useDesignStudioStore();
+  const {zoomPercentage, setZoomPercentage} = useStore(designStudioStore);
 
   const updateValue = (newValue: number) => {
     const clampedValue = Math.max(min, Math.min(max, newValue));
@@ -114,4 +114,4 @@ const ZoomRange: React.FC<ZoomRangeProps> = ({
   );
 };
 
-export default ZoomRange;
+export default CanvasZoomRange;

@@ -1,4 +1,3 @@
-import { useDesignStudioStore } from "@/app/store/state/design-studio/useDesignStudioStore";
 import React from "react";
 
 interface Props {
@@ -6,7 +5,7 @@ interface Props {
   canvaWidth: number;
   canvaHeight: number;
 }
-const CanvasResizers = ({ handleResize, canvaWidth, canvaHeight }: Props) => {
+const CanvasSidesAndCornersResizers = ({ handleResize, canvaWidth, canvaHeight }: Props) => {
   return (
     <>
       {/* Corner resize points */}
@@ -39,7 +38,8 @@ const CanvasResizers = ({ handleResize, canvaWidth, canvaHeight }: Props) => {
       <div
         onMouseDown={handleResize}
         id="resize-left-bar"
-        style={{ height: `${canvaHeight - 10}px` }}
+        // style={{ height: `${canvaHeight - 10}px` }}
+        style={{ height: `100%` }}
         className="left-[-10px] cursor-ew-resize absolute w-[6px] bg-gradient-to-b from-gray-200 to-gray-300 
                       border border-gray-400/20 rounded-sm opacity-50
                       hover:from-gray-300 hover:to-gray-400 hover:scale-x-110
@@ -51,7 +51,8 @@ const CanvasResizers = ({ handleResize, canvaWidth, canvaHeight }: Props) => {
       <div
         onMouseDown={handleResize}
         id="resize-right-bar"
-        style={{ height: `${canvaHeight - 10}px` }}
+        // style={{ height: `${canvaHeight - 10}px` }}
+        style={{ height: `100%` }}
         className="cursor-ew-resize absolute right-[-10px] w-[6px] bg-gradient-to-b from-gray-200 to-gray-300 
                       border border-gray-400/20 rounded-sm opacity-50
                       hover:from-gray-300 hover:to-gray-400 hover:scale-x-110
@@ -64,7 +65,8 @@ const CanvasResizers = ({ handleResize, canvaWidth, canvaHeight }: Props) => {
       <div
         onMouseDown={handleResize}
         id="resize-top-bar"
-        style={{ width: `${canvaWidth - 10}px` }}
+        // style={{ width: `${canvaWidth - 10}px` }}
+        style={{ width: `100%` }}
         className="h-[6px] cursor-ns-resize absolute top-[-10px] bg-gradient-to-r from-gray-200 to-gray-300 
                       border border-gray-400/20 rounded-sm opacity-50
                       hover:from-gray-300 hover:to-gray-400 hover:scale-y-110
@@ -76,7 +78,8 @@ const CanvasResizers = ({ handleResize, canvaWidth, canvaHeight }: Props) => {
       <div
         onMouseDown={handleResize}
         id="resize-bottom-bar"
-        style={{ width: `${canvaWidth - 10}px` }}
+        // style={{ width: `${canvaWidth - 10}px` }}
+        style={{ width: `100%` }}
         className="h-[6px] cursor-ns-resize absolute bottom-[-10px] bg-gradient-to-r from-gray-200 to-gray-300 
                       border border-gray-400/20 rounded-sm opacity-50
                       hover:from-gray-300 hover:to-gray-400 hover:scale-y-110
@@ -89,4 +92,4 @@ const CanvasResizers = ({ handleResize, canvaWidth, canvaHeight }: Props) => {
   );
 };
 
-export default CanvasResizers;
+export default CanvasSidesAndCornersResizers;

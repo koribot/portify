@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import SignoutButton from "../auth/SignoutButton";
-import { portifyGithubLink } from "@/app/config/constants";
+import { portifyGithubLink } from "@/app/constants/variables";
 import { githubIcon } from "@/app/icons/icons";
 import Image from "next/image";
 import { FiHeart, FiMenu, FiX } from "react-icons/fi";

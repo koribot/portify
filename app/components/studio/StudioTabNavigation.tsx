@@ -41,7 +41,7 @@ export default function StudioTabNavigation() {
         </button>
       </div>
       <div className="flex-1 min-h-[60vh] rounded-xl bg-orange-50/50 border border-orange-300 shadow-inner p-4">
-        <div className="max-w-[3000px]">
+        <div>
           {activeTab === "design-studio" && 
           <DesignStudio />
           }

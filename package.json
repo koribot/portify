@@ -11,6 +11,8 @@
   "dependencies": {
     "@next-auth/supabase-adapter": "^0.2.1",
     "@supabase/supabase-js": "^2.51.0",
+    "@zumer/snapdom": "^1.9.6",
+    "jspdf": "^3.0.1",
     "next": "15.4.1",
     "next-auth": "^4.24.11",
     "react": "19.1.0",

@@ -6,8 +6,8 @@ import { getServerSession } from "next-auth";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { githubIcon } from "@/app/icons/icons";
-import { portifyGithubLink } from "@/app/config/constants";
-import MobileHeaderFrontEnd from "./MobileHeaderFrontEnd";
+import { portifyGithubLink } from "@/app/constants/variables";
+import MobileHeader from "./MobileHeader";
 import { authOptions } from "@/app/lib/auth/authoptions";
 import Logo from "../svgs/Logo";
 const Header = async () => {
@@ -69,7 +69,7 @@ const Header = async () => {
             </a>
           </div>
         </div>
-        <MobileHeaderFrontEnd />
+        <MobileHeader />
       </nav>
     </header>
   );

@@ -1,7 +1,7 @@
 "use client";
 
+import { Feature } from "@/app/types";
 import { useState, useEffect } from "react";
-import { Feature } from "../../types";
 
 interface InteractiveFeaturesProps {
   features: Feature[];

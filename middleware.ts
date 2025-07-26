@@ -8,7 +8,7 @@ const protectedPaths = ["/dashboard"];
 const isProtectedPath = (path: string) => protectedPaths.includes(path);
 const isPublicPath = (path: string) => publicPaths.includes(path);
 
-const decodeToken = async (token: any, res: any) => {
+const decodeCookieToken = async (token: any, res: any) => {
   const secretKey = process.env.NEXTAUTH_SECRET || "";
   try {
     return await decode({
@@ -28,7 +28,7 @@ export default async function middleware(req: any) {
   const baseUrl = req.nextUrl.origin;
   const cookie = req.cookies;
 
-  // Always Expose pathname so we can access it directly on server components using headler.get("x-pathname") ~ next/headers
+  // Always Expose pathname so we can access it directly on server components using header.get("x-pathname") ~ next/headers
   const res = NextResponse.next();
   res.headers.set("x-public-pathname", pathname);
 
@@ -36,7 +36,7 @@ export default async function middleware(req: any) {
     cookie.get("next-auth.session-token")?.value ||
     cookie.get("__Secure-next-auth.session-token")?.value;
 
-  const decodedToken = await decodeToken(authCookie, res);
+  const decodedToken = await decodeCookieToken(authCookie, res);
 
   if (decodedToken) {
     if (pathname === "/login") {
@@ -74,77 +74,9 @@ export default async function middleware(req: any) {
       return red;
     }
   }
-
   return res;
-
-  // Skip public routes
-  // if (!pathname.startsWith("/dashboard")) return NextResponse.next();
-
-  // // No token = redirect to login
-  // if (!token || !token.email) {
-  //   return NextResponse.redirect(`${origin}/login`);
-  // }
-
-  // // Check DB
-  // const { data, success } = await getUser(token.email);
-
-  // if (!success || !data) {
-  //   // 🧽 Clear session cookies if user doesn't exist in DB
-  //   const res = NextResponse.redirect(`${origin}/login`);
-  //   res.cookies.set("next-auth.session-token", "", { maxAge: 0 });
-  //   res.cookies.set("__Secure-next-auth.session-token", "", { maxAge: 0 });
-  //   res.cookies.set("next-auth.callback-url", "", { maxAge: 0 });
-  //   return res;
-  // }
-
-  // // ✅ User exists — optionally redirect /dashboard → /dashboard/:id
-  // if (pathname === "/dashboard") {
-  //   return NextResponse.redirect(`${origin}/dashboard/${data.id}`);
-  // }
-
-  // return NextResponse.next();
 }
 
 export const config = {
   matcher: ["/", "/dashboard/:path*", "/api/:path*", "/login"],
 };
-
-// import { withAuth } from "next-auth/middleware";
-// import { NextResponse } from "next/server";
-
-// export default withAuth(
-//   function middleware(req) {
-//     const path = req.nextUrl.pathname;
-//     const token = req.nextauth.token;
-//     const baseUrl = req.nextUrl.origin;
-//     // Handle dashboard root redirect
-//     if (path === "/dashboard" && token?.sub && typeof token.sub === "string") {
-//       return NextResponse.redirect(`${baseUrl}/dashboard/${token.sub}`);
-//     }
-//     // Let NextAuth handle other auth checks via the authorized callback
-//     return NextResponse.next();
-//   },
-//   {
-//     callbacks: {
-//       authorized: async ({ token, req }) => {
-//         // Only allow dashboard access with valid token
-
-//         return req.nextUrl.pathname.startsWith("/dashboard") ? !!token : true;
-//       },
-//     },
-//     pages: {
-//       signIn: "/login",
-//     },
-//   }
-// );
-
-// export const config = {
-//   matcher: [
-//     /*
-//      * Exclude:
-//      * - _next static files (JS, CSS, images)
-//      * - favicon.ico, robots.txt, manifest, .well-known, etc.
-//      */
-//     "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|manifest.json|.well-known).*)",
-//   ],
-// };

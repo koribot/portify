@@ -1,4 +1,4 @@
-import { userTable } from "@/app/config/constants";
+import { userTable } from "@/app/constants/db";
 import { supabase } from "./supabaseClient";
 
 interface IGetUserResponse {
