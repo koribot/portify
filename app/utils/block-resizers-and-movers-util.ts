@@ -62,6 +62,15 @@ export type CursorDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw";
 export const getLength = (x: number, y: number): number =>
   Math.sqrt(x * x + y * y);
 
+// export const getAngle = (
+//   { x: x1, y: y1 }: Point,
+//   { x: x2, y: y2 }: Point
+// ): number => {
+//   const dot = x1 * x2 + y1 * y2;
+//   const det = x1 * y2 - y1 * x2;
+//   const angle = (Math.atan2(det, dot) / Math.PI) * 180;
+//   return (angle + 360) % 360;
+// };
 export const getAngle = (
   { x: x1, y: y1 }: Point,
   { x: x2, y: y2 }: Point
@@ -69,7 +78,7 @@ export const getAngle = (
   const dot = x1 * x2 + y1 * y2;
   const det = x1 * y2 - y1 * x2;
   const angle = (Math.atan2(det, dot) / Math.PI) * 180;
-  return (angle + 360) % 360;
+  return (angle);
 };
 
 export const degToRadian = (deg: number): number => (deg * Math.PI) / 180;

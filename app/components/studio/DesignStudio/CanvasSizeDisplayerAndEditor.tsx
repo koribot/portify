@@ -6,7 +6,7 @@ import {
 } from "@/app/constants/variables";
 import { IPaperSize } from "@/app/global-types/paper-size/types";
 import { designStudioStore } from "@/app/store/state/design-studio/design-studio-store";
-import { getGCD } from "@/app/util/getGCD";
+import { getGCD } from "@/app/utils/getGCD";
 import { Toast } from "@/app/utils/toast";
 import React, { useState, useLayoutEffect } from "react";
 import { FaLock, FaUnlock } from "react-icons/fa";

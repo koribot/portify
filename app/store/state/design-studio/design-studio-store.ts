@@ -8,8 +8,8 @@ import {
   IShapeBlock,
   ITextBlock,
 } from "@/app/global-types/design-blocks/types";
-import { ResizeType } from "@/app/util/block-resizers-and-movers-util";
-import { generateUniqueId } from "@/app/util/generateUniqueId";
+import { ResizeType } from "@/app/utils/block-resizers-and-movers-util";
+import { generateUniqueId } from "@/app/utils/generateUniqueId";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -99,6 +99,7 @@ export interface DesignStudioState {
     id?: string;
     content: string;
   }) => void;
+  deleteContentBlock: ({ index, id }: { index: number; id?: string }) => void;
 }
 export const designStudioStore = create<DesignStudioState>()(
   persist(
@@ -361,7 +362,22 @@ export const designStudioStore = create<DesignStudioState>()(
         }
         set({ content: newContent });
       },
-      setIsTextBlockInputActive: (selected) => set({ isTextBlockInputActive: selected }),
+      deleteContentBlock: ({ index, id }) => {
+        const _content = get().content;
+        let blockIndexToDelete = -1;
+        if (index !== undefined && _content[index]) {
+          blockIndexToDelete = index;
+        } else if (id) {
+          blockIndexToDelete = _content.findIndex((block) => block.id === id);
+        }
+        if (blockIndexToDelete !== -1) {
+          const newContent = [..._content];
+          newContent.splice(blockIndexToDelete, 1);
+          set({ content: newContent });
+        }
+      },
+      setIsTextBlockInputActive: (selected) =>
+        set({ isTextBlockInputActive: selected }),
       setCurrentDesignTitle: (title) => set({ currentDesignTitle: title }),
       setDpi: (dpi) => set({ dpi }),
       setCanvaWidth: (width) => set({ canvaWidth: width }),
@@ -373,7 +389,7 @@ export const designStudioStore = create<DesignStudioState>()(
     {
       name: "design-studio-store",
       version: 0.1,
-      storage: createJSONStorage(() => localStorage)
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

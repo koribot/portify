@@ -9,8 +9,6 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
-  Dispatch,
-  SetStateAction,
 } from "react";
 import { FaArrowsRotate } from "react-icons/fa6";
 import { useStore } from "zustand";
@@ -28,8 +26,9 @@ import {
   type Point,
   getLength,
   degToRadian,
-} from "@/app/util/block-resizers-and-movers-util"; // Update with correct path
+} from "@/app/utils/block-resizers-and-movers-util"; // Update with correct path
 import { Toast } from "@/app/utils/toast";
+import { BsTrash3Fill } from "react-icons/bs";
 
 interface IResizers {
   children: React.ReactNode;
@@ -73,6 +72,7 @@ const BlockResizersAndMovers = ({ children, index }: IResizers) => {
     setContentBlockWidth,
     setContentBlockPosition,
     setFontSize,
+    deleteContentBlock
   } = useStore(designStudioStore);
 
   // Transform-based state - using center-based coordinates
@@ -239,12 +239,13 @@ const BlockResizersAndMovers = ({ children, index }: IResizers) => {
 
         // Use getAngle utility function like file 3
         const angle = getAngle(startPos.current.startVector, rotateVector);
-        let newRotation = Math.round(startPos.current.startAngle + angle);
-        if (newRotation >= 360) {
-          newRotation -= 360;
-        } else if (newRotation < 0) {
-          newRotation += 360;
-        }
+        let newRotation = Math.round(startPos.current.startAngle + angle); // for negative angles display
+        // for 0-360deg display
+        // if (newRotation >= 360) {
+        //   newRotation -= 360;
+        // } else if (newRotation < 0) {
+        //   newRotation += 360;
+        // }
         // for snapping like
         // if (newRotation > 356 || newRotation < 4) {
         //   newRotation = 0;
@@ -415,6 +416,10 @@ const BlockResizersAndMovers = ({ children, index }: IResizers) => {
     transform.rotateAngle,
   ]);
 
+  const handleDeleteBlock = useCallback(() => {
+    deleteContentBlock({ index });
+  }, [deleteContentBlock, index]);
+
   // Initialize from store and handle global clicks
   useLayoutEffect(() => {
     // Convert store's top-left coordinates to center-based
@@ -540,9 +545,26 @@ const BlockResizersAndMovers = ({ children, index }: IResizers) => {
               pointerEvents: isRotating ? "none" : "auto",
             }}
             onMouseDown={handleMouseDown("rotate")}
+            title="Rotate"
           >
             <FaArrowsRotate className="text-blue-500 text-sm" />
           </button>
+          {!isRotating && (
+            <button
+              className="absolute flex items-center justify-center w-8 h-8 bg-white border-2 border-blue-500 rounded-full shadow-lg hover:bg-blue-50"
+              style={{
+                bottom: "-50px",
+                left: "65%",
+                transform: "translateX(-50%)",
+                zIndex: index,
+                pointerEvents: isRotating ? "none" : "auto",
+              }}
+              onClick={handleDeleteBlock}
+              title="Delete"
+            >
+              <BsTrash3Fill className="text-blue-500 text-sm" />
+            </button>
+          )}
 
           {/* Corner resize handles */}
           <div
